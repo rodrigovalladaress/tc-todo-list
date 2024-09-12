@@ -1,15 +1,18 @@
 import { render, screen } from '@testing-library/vue'
 import { beforeEach, expect, describe, it } from 'vitest'
 import TaskList from './TaskList.vue'
+import userEvent from '@testing-library/user-event'
 
 const ITEMS = [
   {
     id: 0,
-    name: 'A test list item'
+    name: 'A test list item',
+    isChecked: false
   },
   {
     id: 1,
-    name: 'Another test item'
+    name: 'Another test item',
+    isChecked: false
   }
 ]
 
@@ -37,14 +40,14 @@ describe('TaskList', () => {
     expect(screen.getByRole('button', { name: /Edit/i })).toBeDefined()
   })
 
-  it('shows the delete button', async () => {
+  it('shows the remove button', async () => {
     render(TaskList, {
       props: {
         items: [ITEMS.at(0)!]
       }
     })
 
-    expect(screen.getByRole('button', { name: /Delete/i })).toBeDefined()
+    expect(screen.getByRole('button', { name: /Remove/i })).toBeDefined()
   })
 
   it('shows the checkbox', async () => {
@@ -55,5 +58,19 @@ describe('TaskList', () => {
     })
 
     expect(screen.getByRole('checkbox', { name: /Mark as done/i })).toBeDefined()
+  })
+
+  it('handles the remove button click', async () => {
+    const { emitted } = render(TaskList, {
+      props: {
+        items: [ITEMS.at(0)!]
+      }
+    })
+
+    userEvent.setup()
+
+    await userEvent.click(screen.getByRole('button', { name: /Remove/i }))
+
+    expect(emitted().remove.at(0)).toContain(ITEMS.at(0)!.id)
   })
 })

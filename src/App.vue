@@ -1,16 +1,7 @@
 <script setup lang="ts">
 import TaskClearCompleted from './components/task/TaskClearCompleted.vue'
-import TaskList from './components/task/TaskList.vue'
+import TaskListStore from './components/task/TaskListStore.vue'
 import TaskNew from './components/task/TaskNew.vue'
-
-const list = [
-  {
-    id: 0,
-    name: 'Godzilla'
-  }
-]
-
-const longList = (new Array(100) as typeof list).fill(list.at(0)!, 0)
 </script>
 
 <template>
@@ -20,7 +11,7 @@ const longList = (new Array(100) as typeof list).fill(list.at(0)!, 0)
         <h1 class="text-3xl font-bold">TODO list</h1>
 
         <div class="flex-grow space-y-2">
-          <TaskList :items="list"></TaskList>
+          <TaskListStore></TaskListStore>
 
           <TaskNew></TaskNew>
         </div>

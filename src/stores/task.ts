@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useTaskStore = defineStore('tasks', {
   state: () => ({
-    itemsById: {} as Record<Task['id'], Task>
+    itemsById: { 0: { id: 0, name: 'Godzilla', isChecked: false } } as Record<string, Task>
   }),
 
   getters: { items: (state) => Object.values(state.itemsById) },
@@ -22,7 +22,7 @@ export const useTaskStore = defineStore('tasks', {
   }
 })
 
-type Task = {
+export type Task = {
   id: number
   name: string
   isChecked: boolean

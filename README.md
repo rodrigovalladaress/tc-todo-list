@@ -8,6 +8,8 @@ I used pnpm as a package manager.
 
 - @testing-library/vue
 - @vueuse/core (required by shadcn)
+- @pinia/testing
+- @testing-library/user-event
 
 # Original README
 

@@ -1,9 +1,12 @@
 import { render, screen } from '@testing-library/vue'
 import { beforeEach, expect, describe, it } from 'vitest'
 import App from './App.vue'
+import { createPinia, setActivePinia } from 'pinia'
 
 describe('App', () => {
   beforeEach(async () => {
+    setActivePinia(createPinia())
+
     render(App)
   })
 
