@@ -2,14 +2,19 @@ import { defineStore } from 'pinia'
 
 export const useTaskStore = defineStore('tasks', {
   state: () => ({
-    itemsById: { 0: { id: 0, name: 'Godzilla', isChecked: false } } as Record<string, Task>
+    nextId: 1,
+    itemsById: {} as Record<string, Task>
   }),
 
   getters: { items: (state) => Object.values(state.itemsById) },
 
   actions: {
-    add(item: Task) {
-      this.itemsById[item.id] = item
+    add(item: Omit<Task, 'id'>) {
+      const id = this.nextId
+
+      this.nextId += 1
+
+      this.itemsById[id] = { ...item, id }
     },
 
     edit(id: Task['id'], item: Partial<Omit<Task, 'id'>>) {

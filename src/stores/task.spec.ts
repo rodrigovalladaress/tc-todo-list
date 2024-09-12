@@ -8,11 +8,11 @@ describe('Task store', () => {
   })
 
   it('adds a new task', () => {
-    const ITEM = { id: 0, name: 'The test item', isChecked: false }
+    const ITEM = { id: 1, name: 'The test item', isChecked: false }
 
     const store = useTaskStore()
     store.add(ITEM)
-    expect(store.itemsById[ITEM.id]).deep.equal(ITEM)
+    expect(store.itemsById[1]).deep.equal(ITEM)
   })
 
   it('edits a task', () => {
