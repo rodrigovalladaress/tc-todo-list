@@ -9,6 +9,7 @@
         :id="id"
         :name="name"
         @remove="handleRemove"
+        @edit="handleEdit"
       ></TaskListItem>
     </ul>
   </div>
@@ -27,10 +28,17 @@ withDefaults(
   }
 )
 
-const emit = defineEmits<{ (e: 'remove', id: Task['id']): void }>()
+const emit = defineEmits<{
+  (e: 'remove', id: Task['id']): void
+  (e: 'edit', id: Task['id'], task: Partial<Omit<Task, 'id'>>): void
+}>()
 
 function handleRemove(id: Task['id']) {
   emit('remove', id)
+}
+
+function handleEdit(id: Task['id'], task: Partial<Omit<Task, 'id'>>) {
+  emit('edit', id, task)
 }
 </script>
 

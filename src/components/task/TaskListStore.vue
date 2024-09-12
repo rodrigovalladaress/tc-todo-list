@@ -1,6 +1,6 @@
 <template>
   <div></div>
-  <TaskList :items="items" @remove="handleRemove"></TaskList>
+  <TaskList :items="items" @remove="handleRemove" @edit="handleEdit"></TaskList>
 </template>
 
 <script lang="ts" setup>
@@ -14,6 +14,10 @@ const { items } = storeToRefs(store)
 
 function handleRemove(id: Task['id']) {
   store.remove(id)
+}
+
+function handleEdit(id: Task['id'], task: Partial<Omit<Task, 'id'>>) {
+  store.edit(id, task)
 }
 </script>
 

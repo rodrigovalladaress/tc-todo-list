@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/vue'
+import { render, screen, within, type RenderResult } from '@testing-library/vue'
 import { createTestingPinia } from '@pinia/testing'
 import userEvent from '@testing-library/user-event'
 
@@ -79,5 +79,25 @@ describe('TaskListStore', () => {
     await userEvent.click(removeButton)
 
     expect(screen.queryByText(ITEM.name)).toBeNull()
+  })
+
+  it('updates the item in the store when editing the list item', async () => {
+    const ITEM = ITEMS.at(2)!
+
+    userEvent.setup()
+
+    const listItem = screen.getByTestId(`list-item-${ITEM.id}`)
+
+    const editButton = within(listItem).getByRole('button', { name: /Edit/i })
+    await userEvent.click(editButton)
+
+    const input = within(listItem).getByRole('textbox', { name: `Edit ${ITEM.name}` })
+    await userEvent.clear(input)
+    await userEvent.type(input, 'The new text')
+
+    const saveButton = within(listItem).getByRole('button', { name: /Save/i })
+    await userEvent.click(saveButton)
+
+    expect(screen.getByText('The new text')).toBeDefined()
   })
 })
