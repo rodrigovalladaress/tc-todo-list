@@ -7,6 +7,7 @@ I used pnpm as a package manager.
 ## Modules installed
 
 - @testing-library/vue
+- @vueuse/core (required by shadcn)
 
 # Original README
 
