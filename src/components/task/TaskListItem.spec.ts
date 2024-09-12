@@ -1,30 +1,28 @@
-import { render, screen } from '@testing-library/vue'
-import { expect, describe, it } from 'vitest'
+import { render, screen, type RenderResult } from '@testing-library/vue'
+import { expect, describe, it, beforeEach } from 'vitest'
 import TaskListItem from './TaskListItem.vue'
 import userEvent from '@testing-library/user-event'
 
 const ITEM = { id: 200, name: 'Another item', isChecked: false }
 
 describe('TaskListItem', () => {
-  it('shows the item', async () => {
-    render(TaskListItem, {
+  let r: RenderResult
+
+  beforeEach(() => {
+    r = render(TaskListItem, {
       props: {
         id: ITEM.id,
-        name: ITEM.name
+        name: ITEM.name,
+        isChecked: ITEM.isChecked
       }
     })
+  })
 
+  it('shows the item', async () => {
     expect(screen.queryByText(ITEM.name)).not.toBeNull()
   })
 
   it('shows the edit input when clicking on edit', async () => {
-    render(TaskListItem, {
-      props: {
-        id: ITEM.id,
-        name: ITEM.name
-      }
-    })
-
     userEvent.setup()
 
     await userEvent.click(screen.getByRole('button', { name: /Edit/i }))
@@ -35,13 +33,6 @@ describe('TaskListItem', () => {
   })
 
   it('changes the edit button to save button when clicking on edit', async () => {
-    render(TaskListItem, {
-      props: {
-        id: ITEM.id,
-        name: ITEM.name
-      }
-    })
-
     userEvent.setup()
 
     await userEvent.click(screen.getByRole('button', { name: /Edit/i }))
@@ -50,13 +41,8 @@ describe('TaskListItem', () => {
     expect(screen.getByRole('button', { name: /Save/i })).toBeDefined()
   })
 
-  it('emits the save event when clicking on save button', async () => {
-    const { emitted } = render(TaskListItem, {
-      props: {
-        id: ITEM.id,
-        name: ITEM.name
-      }
-    })
+  it('emits the edit event when clicking on save button', async () => {
+    const { emitted } = r
 
     userEvent.setup()
 
@@ -72,13 +58,6 @@ describe('TaskListItem', () => {
   })
 
   it('shows the edit button again when clicking on save', async () => {
-    render(TaskListItem, {
-      props: {
-        id: ITEM.id,
-        name: ITEM.name
-      }
-    })
-
     userEvent.setup()
 
     await userEvent.click(screen.getByRole('button', { name: /Edit/i }))
@@ -86,5 +65,15 @@ describe('TaskListItem', () => {
 
     expect(screen.getByRole('button', { name: /Edit/i })).toBeDefined()
     expect(screen.queryByRole('button', { name: /Save/i })).toBeNull()
+  })
+
+  it.only('emits the edit event when clicking on the checkbox', async () => {
+    const { emitted } = r
+
+    userEvent.setup()
+
+    await userEvent.click(screen.getByRole('checkbox'))
+
+    expect(emitted().edit.at(0)).deep.includes({ isChecked: true })
   })
 })

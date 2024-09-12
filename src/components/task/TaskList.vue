@@ -2,12 +2,13 @@
   <div>
     <ul class="flex-1 bg-pink-200 rounded-sm">
       <TaskListItem
-        v-for="{ id, name } in items"
+        v-for="{ id, name, isChecked } in items"
         :key="id"
         class="flex items-center gap-3 py-2 px-3"
         :data-testid="`list-item-${id}`"
         :id="id"
         :name="name"
+        :is-checked="isChecked"
         @remove="handleRemove"
         @edit="handleEdit"
       ></TaskListItem>

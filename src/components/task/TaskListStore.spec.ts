@@ -1,4 +1,4 @@
-import { render, screen, within, type RenderResult } from '@testing-library/vue'
+import { render, screen, within } from '@testing-library/vue'
 import { createTestingPinia } from '@pinia/testing'
 import userEvent from '@testing-library/user-event'
 
@@ -99,5 +99,20 @@ describe('TaskListStore', () => {
     await userEvent.click(saveButton)
 
     expect(screen.getByText('The new text')).toBeDefined()
+  })
+
+  it('updates the item in the store when clicking on the checkbox', async () => {
+    const ITEM = ITEMS.at(2)!
+
+    const store = useTaskStore()
+
+    userEvent.setup()
+
+    const listItem = screen.getByTestId(`list-item-${ITEM.id}`)
+
+    const checkbox = within(listItem).getByRole('checkbox')
+    await userEvent.click(checkbox)
+
+    expect(store.itemsById[ITEM.id].isChecked).toBe(true)
   })
 })
