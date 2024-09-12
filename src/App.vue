@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TaskClearCompleted from './components/task/TaskClearCompleted.vue'
 import TaskList from './components/task/TaskList.vue'
 import TaskNew from './components/task/TaskNew.vue'
 </script>
@@ -17,6 +18,8 @@ import TaskNew from './components/task/TaskNew.vue'
         }
       ]"
     ></TaskList>
+
+    <TaskClearCompleted></TaskClearCompleted>
   </div>
 </template>
 
