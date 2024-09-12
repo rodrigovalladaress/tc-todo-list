@@ -4,9 +4,9 @@
       <Plus :size="24" />
     </span>
 
-    <Input id="task-new" aria-label="New task" class="text-lg"></Input>
+    <Input id="task-new" aria-label="New task" class="text-lg" v-model="name"></Input>
 
-    <Button type="submit">Add</Button>
+    <Button type="submit" @click="handleAdd">Add</Button>
   </div>
 </template>
 
@@ -14,6 +14,19 @@
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-vue-next'
+import type { Task } from '@/stores/task'
+import { ref } from 'vue'
+
+const emit = defineEmits<{
+  (e: 'add', task: Omit<Task, 'id' | 'isChecked'>): void
+}>()
+
+const name = ref('')
+
+function handleAdd() {
+  emit('add', { name: name.value })
+  name.value = ''
+}
 </script>
 
 <style></style>
