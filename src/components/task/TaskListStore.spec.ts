@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/vue'
+import { render, screen, within } from '@testing-library/vue'
 import { createTestingPinia } from '@pinia/testing'
 import userEvent from '@testing-library/user-event'
 
