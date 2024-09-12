@@ -8,7 +8,10 @@ export default mergeConfig(
     test: {
       environment: 'jsdom',
       exclude: [...configDefaults.exclude, 'e2e/**'],
-      root: fileURLToPath(new URL('./', import.meta.url))
+      root: fileURLToPath(new URL('./', import.meta.url)),
+      // Vue Testing Library requires globals: true
+      // https://testing-library.com/docs/vue-testing-library/setup#vitest
+      globals: true
     }
   })
 )

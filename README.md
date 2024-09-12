@@ -1,8 +1,12 @@
 # True Compliance TODO list
 
-## 1. Package manager
+## Package manager
 
 I used pnpm as a package manager.
+
+## Modules installed
+
+- @testing-library/vue
 
 # Original README
 
