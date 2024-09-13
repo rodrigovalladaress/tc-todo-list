@@ -64,4 +64,19 @@ describe('Task store', () => {
     expect(store.itemsById[id]).toBeDefined()
     expect(store.itemsById[idToClear]).toBeUndefined()
   })
+
+  it('removes all tasks', async () => {
+    const ITEMS = [
+      { name: 'Task 1', isChecked: false },
+      { name: 'Task 2', isChecked: false },
+      { name: 'Task 3', isChecked: false }
+    ]
+
+    const store = useTaskStore()
+    store.add(ITEMS)
+    expect(store.items.length).toBe(3)
+
+    store.removeAll()
+    expect(store.items.length).toBe(0)
+  })
 })

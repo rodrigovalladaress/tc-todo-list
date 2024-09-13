@@ -26,6 +26,10 @@ async function onAddFakeDataClick(howMany: 10 | 100 | 1000) {
 
   store.add(tasksToAdd)
 }
+
+function onRemoveAllTasksClick() {
+  store.removeAll()
+}
 </script>
 
 <template>
@@ -45,6 +49,8 @@ async function onAddFakeDataClick(howMany: 10 | 100 | 1000) {
             <TaskClearCompletedStore />
 
             <div class="flex gap-2">
+              <Button @click="onRemoveAllTasksClick">Remove all tasks</Button>
+
               <Button @click="onAddFakeDataClick(10)">Add 10 fake tasks</Button>
 
               <Button @click="onAddFakeDataClick(100)">Add 100 fake tasks</Button>

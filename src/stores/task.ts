@@ -31,6 +31,10 @@ export const useTaskStore = defineStore('tasks', {
       delete this.itemsById[id]
     },
 
+    removeAll() {
+      this.itemsById = {}
+    },
+
     clearChecked() {
       for (const { id, isChecked } of this.items) {
         if (isChecked) {
