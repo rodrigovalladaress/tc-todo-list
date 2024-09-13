@@ -9,7 +9,7 @@ import TaskClearCompleted from './TaskClearCompleted.vue'
 const store = useTaskStore()
 
 function handleClear() {
-  store.clearChecked()
+  store.removeAllChecked()
 }
 </script>
 

@@ -60,7 +60,7 @@ describe('Task store', () => {
     expect(store.itemsById[id]).toBeDefined()
     expect(store.itemsById[idToClear]).toBeDefined()
 
-    store.clearChecked()
+    store.removeAllChecked()
     expect(store.itemsById[id]).toBeDefined()
     expect(store.itemsById[idToClear]).toBeUndefined()
   })
