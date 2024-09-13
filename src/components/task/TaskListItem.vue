@@ -7,9 +7,7 @@
       v-model:checked="ownIsChecked"
     ></Checkbox>
 
-    <span v-if="!isEditMode" class="flex-grow text-lg">
-      {{ name }}
-    </span>
+    <span v-if="!isEditMode" class="flex-grow text-lg"> #{{ id }}: {{ name }} </span>
 
     <Input v-else class="flex-grow text-lg" v-model="ownName" :aria-label="`Edit ${name}`"></Input>
 
