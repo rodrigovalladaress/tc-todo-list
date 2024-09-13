@@ -7,9 +7,9 @@
       v-model:checked="ownIsChecked"
     ></Checkbox>
 
-    <span class="text-lg font-bold"> #{{ id }}: </span>
+    <span class="text-lg font-bold" :class="{ 'line-through': ownIsChecked }"> #{{ id }}: </span>
 
-    <span v-if="!isEditMode" class="flex-grow text-lg">
+    <span v-if="!isEditMode" class="flex-grow text-lg" :class="{ 'line-through': ownIsChecked }">
       {{ name }}
     </span>
 
