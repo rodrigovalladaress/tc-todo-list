@@ -19,6 +19,7 @@
       v-model="ownName"
       v-model:input-ref="inputRef"
       :aria-label="`Edit ${name}`"
+      @keydown.enter="onSaveClick"
     ></Input>
 
     <span class="flex gap-2">

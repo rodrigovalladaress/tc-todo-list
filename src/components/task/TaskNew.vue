@@ -4,7 +4,13 @@
       <Plus :size="24" />
     </span>
 
-    <Input id="task-new" aria-label="New task" class="text-lg" v-model="name"></Input>
+    <Input
+      id="task-new"
+      aria-label="New task"
+      class="text-lg"
+      v-model="name"
+      @keydown.enter="handleAdd"
+    ></Input>
 
     <Button type="submit" @click="handleAdd">Add</Button>
   </div>
