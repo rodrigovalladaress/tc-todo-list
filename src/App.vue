@@ -35,7 +35,9 @@ function onRemoveAllTasksClick() {
 <template>
   <div id="tc-vue-template" class="min-h-full h-full flex" style="background-color: aqua">
     <div class="flex flex-col flex-grow p-8 pt-6 overflow-y-auto bg-lime-400">
-      <div class="flex flex-col flex-grow p-4 pb-12 space-y-4 bg-white rounded-sm">
+      <div
+        class="flex flex-col flex-grow p-4 pb-36 sm:pb-28 md:pb-24 lg:pb-12 space-y-4 bg-white rounded-sm"
+      >
         <h1 class="text-3xl font-bold">TODO list</h1>
 
         <div class="flex-grow space-y-2">
@@ -45,10 +47,10 @@ function onRemoveAllTasksClick() {
         </div>
 
         <div class="fixed bottom-0 left-0 w-full flex bg-white border-t-2">
-          <div class="flex-grow mx-8 px-0 py-3 flex justify-between gap-3 rounded-sm">
+          <div class="flex-grow mx-8 px-0 py-3 flex justify-between gap-3 rounded-sm flex-wrap">
             <TaskClearCompletedStore />
 
-            <div class="flex gap-2">
+            <div class="flex gap-2 flex-wrap">
               <Button @click="onRemoveAllTasksClick">Remove all tasks</Button>
 
               <Button @click="onAddFakeDataClick(10)">Add 10 fake tasks</Button>

@@ -1,5 +1,5 @@
 <template>
-  <div ref="rootRef">
+  <div ref="rootRef" class="flex-wrap md:flex-nowrap">
     <Checkbox
       :id="`task-${id}-done`"
       class="size-7 bg-pink-100"
@@ -9,7 +9,11 @@
 
     <span class="text-lg font-bold" :class="{ 'line-through': ownIsChecked }"> #{{ id }}: </span>
 
-    <span v-if="!isEditMode" class="flex-grow text-lg" :class="{ 'line-through': ownIsChecked }">
+    <span
+      v-if="!isEditMode"
+      class="flex-grow text-lg truncate"
+      :class="{ 'line-through': ownIsChecked }"
+    >
       {{ name }}
     </span>
 
@@ -22,11 +26,13 @@
       @keydown.enter="onSaveClick"
     ></Input>
 
-    <span class="flex gap-2">
+    <span class="flex gap-2 w-full justify-end md:w-fit">
       <Button v-if="!isEditMode" @click="onEditClick">Edit</Button>
-      <Button v-else @click="onSaveClick">Save</Button>
+      <Button v-else @click="onSaveClick" class="bg-green-600">Save</Button>
 
-      <Button @click="onRemoveClick">Remove</Button>
+      <Button @click="onRemoveClick" variant="ghost" class="text-red-600 border-red-600">
+        Remove
+      </Button>
     </span>
   </div>
 </template>

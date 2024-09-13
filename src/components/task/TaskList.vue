@@ -1,10 +1,10 @@
 <template>
   <div>
-    <ul class="flex-1 bg-pink-200 rounded-sm">
+    <ul class="flex-1 space-y-2">
       <TaskListItem
         v-for="{ id, name, isChecked } in currentItems"
         :key="id"
-        class="flex items-center gap-3 py-2 px-3"
+        class="flex items-center gap-3 py-2 px-3 rounded-sm bg-pink-200"
         :data-testid="`list-item-${id}`"
         :id="id"
         :name="name"

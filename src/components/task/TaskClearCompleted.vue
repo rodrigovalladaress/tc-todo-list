@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Button @click="onButtonClick">Clear completed</Button>
+    <Button variant="destructive" @click="onButtonClick">Clear completed</Button>
   </div>
 </template>
 
@@ -8,13 +8,12 @@
 import { Button } from '@/components/ui/button'
 
 const emit = defineEmits<{
-  (e: 'clear',): void
+  (e: 'clear'): void
 }>()
 
 function onButtonClick() {
-  emit("clear")
+  emit('clear')
 }
-
 </script>
 
 <style></style>
