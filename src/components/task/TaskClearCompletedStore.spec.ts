@@ -40,7 +40,7 @@ describe('TaskClearCompletedStore', () => {
     render(TaskClearCompletedStore)
   })
 
-  it('adds the new task to the store', async () => {
+  it('clears all the checked tasks in the store', async () => {
     userEvent.setup()
 
     const store = useTaskStore()
