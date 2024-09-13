@@ -6,6 +6,7 @@ import { beforeEach, expect, describe, it } from 'vitest'
 import TaskListStore from './TaskListStore.vue'
 import { setActivePinia } from 'pinia'
 import { useTaskStore } from '@/stores/task'
+import { nextTick } from 'vue'
 
 const ITEMS = [
   {
@@ -55,14 +56,18 @@ describe('TaskListStore', () => {
     const ITEM = { id: 100, name: 'This new item', isChecked: false }
 
     const store = useTaskStore()
-    await store.add([ITEM])
+    store.add([ITEM])
+
+    await nextTick()
 
     expect(screen.getByText(ITEM.name)).toBeDefined()
   })
 
   it('stops showing the item after removing it directly in the store', async () => {
     const store = useTaskStore()
-    await store.remove(ITEMS.at(2)!.id)
+    store.remove(ITEMS.at(2)!.id)
+
+    await nextTick()
 
     expect(screen.queryByText(ITEMS.at(2)!.name)).toBeNull()
   })
