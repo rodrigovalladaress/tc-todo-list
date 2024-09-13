@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="rootRef">
     <Checkbox
       :id="`task-${id}-done`"
       class="size-7 bg-pink-100"
@@ -13,7 +13,13 @@
       {{ name }}
     </span>
 
-    <Input v-else class="flex-grow text-lg" v-model="ownName" :aria-label="`Edit ${name}`"></Input>
+    <Input
+      v-else
+      class="flex-grow text-lg"
+      v-model="ownName"
+      v-model:input-ref="inputRef"
+      :aria-label="`Edit ${name}`"
+    ></Input>
 
     <span class="flex gap-2">
       <Button v-if="!isEditMode" @click="onEditClick">Edit</Button>
@@ -25,11 +31,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import type { Task } from '@/stores/task'
+import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps<{ id: number; name: string; isChecked: boolean }>()
 
@@ -41,9 +48,16 @@ const emit = defineEmits<{
 const isEditMode = ref(false)
 const ownName = ref(props.name)
 const ownIsChecked = ref(props.isChecked)
+const rootRef = ref<null | HTMLElement>(null)
+const inputRef = ref<null | HTMLInputElement>(null)
 
 watch(ownIsChecked, () => {
   onIsCheckedChange()
+})
+
+// Disable the edit mode when the user clicks outside the element
+onClickOutside(rootRef, () => {
+  onSaveClick()
 })
 
 function onRemoveClick() {
@@ -52,6 +66,13 @@ function onRemoveClick() {
 
 function onEditClick() {
   isEditMode.value = true
+
+  nextTick(() => {
+    if (isEditMode.value && inputRef.value) {
+      inputRef.value.focus()
+      inputRef.value.select()
+    }
+  })
 }
 
 function onSaveClick() {
