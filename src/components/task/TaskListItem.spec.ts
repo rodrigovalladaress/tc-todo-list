@@ -67,7 +67,7 @@ describe('TaskListItem', () => {
     expect(screen.queryByRole('button', { name: /Save/i })).toBeNull()
   })
 
-  it.only('emits the edit event when clicking on the checkbox', async () => {
+  it('emits the edit event when clicking on the checkbox', async () => {
     const { emitted } = r
 
     userEvent.setup()
