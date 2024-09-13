@@ -9,14 +9,18 @@ export const useTaskStore = defineStore('tasks', {
   getters: { items: (state) => Object.values(state.itemsById) },
 
   actions: {
-    add(item: Omit<Task, 'id'>) {
-      const id = this.nextId
+    add(items: Omit<Task, 'id'>[]) {
+      const ids: number[] = []
 
-      this.nextId += 1
+      for (const item of items) {
+        const id = this.nextId
+        this.nextId += 1
 
-      this.itemsById[id] = { ...item, id }
+        this.itemsById[id] = { ...item, id }
+        ids.push(id)
+      }
 
-      return id
+      return ids
     },
 
     edit(id: Task['id'], item: Partial<Omit<Task, 'id'>>) {

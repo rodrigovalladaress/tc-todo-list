@@ -9,7 +9,7 @@ import TaskNew from './TaskNew.vue'
 const store = useTaskStore()
 
 function handleAdd(task: Omit<Task, 'id' | 'isChecked'>) {
-  store.add({ ...task, isChecked: false })
+  store.add([{ ...task, isChecked: false }])
 }
 </script>
 

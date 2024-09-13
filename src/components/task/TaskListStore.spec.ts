@@ -55,7 +55,7 @@ describe('TaskListStore', () => {
     const ITEM = { id: 100, name: 'This new item', isChecked: false }
 
     const store = useTaskStore()
-    await store.add(ITEM)
+    await store.add([ITEM])
 
     expect(screen.getByText(ITEM.name)).toBeDefined()
   })
