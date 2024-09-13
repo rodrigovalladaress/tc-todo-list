@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TaskClearCompleted from './components/task/TaskClearCompleted.vue'
+import TaskClearCompletedStore from './components/task/TaskClearCompletedStore.vue'
 import TaskListStore from './components/task/TaskListStore.vue'
 import TaskNewStore from './components/task/TaskNewStore.vue'
 </script>
@@ -16,7 +16,7 @@ import TaskNewStore from './components/task/TaskNewStore.vue'
           <TaskNewStore></TaskNewStore>
         </div>
 
-        <TaskClearCompleted />
+        <TaskClearCompletedStore />
       </div>
     </div>
   </div>
