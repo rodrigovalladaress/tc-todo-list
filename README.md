@@ -10,6 +10,7 @@ I used pnpm as a package manager.
 - @vueuse/core (required by shadcn)
 - @pinia/testing
 - @testing-library/user-event
+- pinia-plugin-persistedstate
 
 # Original README
 

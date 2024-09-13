@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 
 export const useTaskStore = defineStore('tasks', {
+  persist: true,
   state: () => ({
     nextId: 1,
     itemsById: {} as Record<string, Task>

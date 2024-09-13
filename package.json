@@ -19,6 +19,7 @@
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.439.0",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^4.0.1",
     "radix-vue": "^1.9.5",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
