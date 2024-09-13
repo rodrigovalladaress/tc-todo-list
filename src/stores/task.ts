@@ -15,6 +15,8 @@ export const useTaskStore = defineStore('tasks', {
       this.nextId += 1
 
       this.itemsById[id] = { ...item, id }
+
+      return id
     },
 
     edit(id: Task['id'], item: Partial<Omit<Task, 'id'>>) {
@@ -23,6 +25,14 @@ export const useTaskStore = defineStore('tasks', {
 
     remove(id: Task['id']) {
       delete this.itemsById[id]
+    },
+
+    clearChecked() {
+      for (const { id, isChecked } of this.items) {
+        if (isChecked) {
+          delete this.itemsById[id]
+        }
+      }
     }
   }
 })

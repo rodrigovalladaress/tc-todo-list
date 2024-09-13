@@ -38,4 +38,19 @@ describe('Task store', () => {
     store.remove(ITEM.id)
     expect(store.itemsById[ITEM.id]).toBeUndefined()
   })
+
+  it('removes completed tasks', async () => {
+    const ITEM = { name: 'The task to not clear', isChecked: false }
+    const ITEM_TO_CLEAR = { name: 'The task to add and clear', isChecked: true }
+
+    const store = useTaskStore()
+    const id = store.add(ITEM)
+    const idToClear = store.add(ITEM_TO_CLEAR)
+    expect(store.itemsById[id]).toBeDefined()
+    expect(store.itemsById[idToClear]).toBeDefined()
+
+    store.clearChecked()
+    expect(store.itemsById[id]).toBeDefined()
+    expect(store.itemsById[idToClear]).toBeUndefined()
+  })
 })
